@@ -39,6 +39,8 @@ export class AuthService{
       if(response.result._id && response.result._id !== null){
         this.login( authData.email, authData.password );
       }
+    }, error => {
+      this.authStatusListener.next(false);
     });
   }
   login(email: string, password: string){
@@ -61,6 +63,8 @@ export class AuthService{
         console.log( expirationDate);
         this.router.navigate(['/']);
       }
+    }, error =>{
+      this.authStatusListener.next(false);
     });
   }
   autoAuthUser(){
